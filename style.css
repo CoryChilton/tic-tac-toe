@@ -1,0 +1,21 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+#board {
+  display: inline-grid;
+  grid-template-columns: repeat(3, calc(90vmin/3));
+  grid-auto-rows: calc(90vmin/3);
+  background-color: lightblue;
+}
+
+#board > div {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 100px;
+}
