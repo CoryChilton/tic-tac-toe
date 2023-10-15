@@ -34,15 +34,32 @@ const game = (function () {
     if (board.placeMarker(r, c, curPlayer)) {
       curPlayer = curPlayer === 'X' ? 'O' : 'X';
     }
-    
+
   }
 
-  function checkWinner(player) {
-    board.getBoard().forEach(row => {
-      if (row[0] === player && row[0] === row[1] && row[1] === row[2]) {
+  function checkWinner() {
+    const b = board.getBoard();
+    const player = curPlayer === 'X' ? 'O' : 'X';
+    for (let r = 0; r < 3; r++) {
+      if (b[r][0] === player && b[r][0] === b[r][1] && b[r][1] === b[r][2]) {
         alert(`${player} wins!`)
+        return true;
       }
-    })
+    }
+
+    for (let c = 0; c < 3; c++) {
+      if (b[0][c] === player && b[0][c] === b[1][c] && b[1][c] === b[2][c]) {
+        alert(`${player} wins!`)
+        return true;
+      }
+    }
+
+    if ( (b[0][0] === player && b[0][0] === b[1][1] && b[1][1] === b[2][2]) 
+      || (b[0][2] === player && b[0][2] === b[1][1] && b[1][1] === b[2][0])) {
+      alert(`${player} wins!`)
+      return true;
+    }
+
   }
 
   function clear() {
@@ -50,7 +67,7 @@ const game = (function () {
     curPlayer = 'X';
   }
 
-  return { getCurPlayer, playRound, clear, getBoard: board.getBoard };
+  return { getCurPlayer, playRound, clear, checkWinner, getBoard: board.getBoard };
 })();
 
 const displayController = (function () {
@@ -82,6 +99,12 @@ const displayController = (function () {
     const col = parseInt(e.target.dataset.col);
     game.playRound(row, col);
     renderGame();
+    setTimeout(() => {
+      if (game.checkWinner()) {
+        resetGame();
+      }
+    }, 100);
+    
   }
 
   boardDiv.addEventListener('click', handleBoardClick);
