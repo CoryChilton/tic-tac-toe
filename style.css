@@ -7,8 +7,8 @@ body {
 
 #board {
   display: inline-grid;
-  grid-template-columns: repeat(3, calc(90vmin/3));
-  grid-auto-rows: calc(90vmin/3);
+  grid-template-columns: repeat(3, calc(80vmin/3));
+  grid-auto-rows: calc(80vmin/3);
   background-color: lightblue;
 }
 
@@ -17,5 +17,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 100px;
+  font-size: 20vmin;
+}
+
+#change-p1 {
+  margin-right: 30px;
 }
