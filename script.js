@@ -58,23 +58,24 @@ const game = (function () {
   function checkWinner() {
     const b = board.getBoard();
     const player = curPlayer.getMarker() === 'X' ? 'O' : 'X';
+    const playerName = curPlayer === player1 ? player2.getName() : player1.getName();
     for (let r = 0; r < 3; r++) {
       if (b[r][0] === player && b[r][0] === b[r][1] && b[r][1] === b[r][2]) {
-        alert(`${player} wins!`)
+        alert(`${playerName} wins!`)
         return true;
       }
     }
 
     for (let c = 0; c < 3; c++) {
       if (b[0][c] === player && b[0][c] === b[1][c] && b[1][c] === b[2][c]) {
-        alert(`${player} wins!`)
+        alert(`${playerName} wins!`)
         return true;
       }
     }
 
     if ( (b[0][0] === player && b[0][0] === b[1][1] && b[1][1] === b[2][2]) 
       || (b[0][2] === player && b[0][2] === b[1][1] && b[1][1] === b[2][0])) {
-      alert(`${player} wins!`)
+      alert(`${playerName} wins!`)
       return true;
     }
 
@@ -125,7 +126,7 @@ const displayController = (function () {
     });
 
     turnH2.innerText = `${curPlayerName}'s turn`
-    playersH3.innerText = `${player1Name} vs. ${player2Name}`;
+    playersH3.innerText = `${player1Name} as X vs. ${player2Name} as O`;
 
   }
 
